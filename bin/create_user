@@ -1,0 +1,22 @@
+#!/usr/bin/env php
+<?php
+// create_user
+
+use Doctrine\ORM\EntityManager;
+use App\Domain\User;
+
+$container = require_once __DIR__ . '/../bootstrap.php';
+$entityManager = $container->get(EntityManager::class);
+
+$newUsername = $argv[1];
+$newEmail = $argv[2];
+
+$user = new User();
+$user->setName($newUsername);
+$user->setEmail($newEmail);
+$user->setRegisteredAt();
+
+$entityManager->persist($user);
+$entityManager->flush();
+
+echo "Created User with ID " . $user->getId() . PHP_EOL;
