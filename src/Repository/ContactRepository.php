@@ -1,16 +1,16 @@
 <?php
-// UserRepository.php
+// ContactRepository.php
 
 namespace App\Repository;
 
 use Doctrine\ORM\EntityRepository;
 
-final class UserRepository extends EntityRepository
+final class ContactRepository extends EntityRepository
 {
-    public function getAllUsers($number = 30): mixed
+    public function getAllContacts($number = 30): mixed
     {
         $dql = <<<QUERY
-        SELECT u FROM App\Domain\User u
+        SELECT c FROM App\Domain\Contact c
         QUERY;
 
         $query = $this->getEntityManager()->createQuery($dql);
