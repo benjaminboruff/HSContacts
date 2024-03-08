@@ -6,12 +6,37 @@
 
 <div class="container">
     <h1 class="title">Contacts</h1>
-    
-    <ul>
+
+    <form action="/contacts" method="get">
+        <label for="search">Search Term</label>
+        <input id="serach" type="search" name="q" value="{{ search }}">
+        <input type="submit" value="Search">
+    </form>
+    <br>
+    <!-- <ul>
         {% for contact in contacts %}
         <li>{{ contact.firstName }} {{ contact.lastName }} {{ contact.email }} {{ contact.phone }}</li>
         {% endfor %}
-    </ul>
+    </ul> -->
+     <table>
+        <thead>
+        <tr>
+            <th>First</th> <th>Last</th> <th>Phone</th> <th>Email</th> <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for contact in contacts %}
+            <tr>
+                <td>{{ contact.firstName }}</td>
+                <td>{{ contact.lastName }}</td>
+                <td>{{ contact.phone }}</td>
+                <td>{{ contact.email }}</td>
+                <td><a href="/contacts/{{ contact.id }}/edit">Edit</a>
+                    <a href="/contacts/{{ contact.id }}">View</a></td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
     <hr>
     <button hx-get="/" hx-target="#content" hx-swap="outerHTML" hx-push-url="true">Back</button>
 </div>
