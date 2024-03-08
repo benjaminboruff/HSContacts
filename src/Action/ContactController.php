@@ -21,9 +21,9 @@ class ContactController
 
     public function index(Request $request, Response $response): Response
     {
-        $users = $this->contactRepository->getAllContacts();
+        $contacts = $this->contactRepository->getAllContacts();
         $view = Twig::fromRequest($request);
 
-        return $view->render($response, 'users.twig', ['users' => $users]);
+        return $view->render($response, 'contacts.twig', ['contacts' => $contacts]);
     }
 }

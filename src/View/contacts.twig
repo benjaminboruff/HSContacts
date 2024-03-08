@@ -1,0 +1,19 @@
+{% extends "layout.twig" %}
+
+{% block title %} Contacts {% endblock %}
+
+{% block content %}
+
+<div class="container">
+    <h1 class="title">Contacts</h1>
+    
+    <ul>
+        {% for contact in contacts %}
+        <li>{{ contact.firstName }} {{ contact.lastName }} {{ contact.email }} {{ contact.phone }}</li>
+        {% endfor %}
+    </ul>
+    <hr>
+    <button hx-get="/" hx-target="#content" hx-swap="outerHTML" hx-push-url="true">Back</button>
+</div>
+
+{% endblock %}

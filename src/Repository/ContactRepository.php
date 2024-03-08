@@ -10,7 +10,7 @@ final class ContactRepository extends EntityRepository
     public function getAllContacts($number = 30): mixed
     {
         $dql = <<<QUERY
-        SELECT c FROM App\Domain\Contact c
+        SELECT u FROM App\Domain\Contact u
         QUERY;
 
         $query = $this->getEntityManager()->createQuery($dql);

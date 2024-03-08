@@ -1,0 +1,26 @@
+#!/usr/bin/env php
+<?php
+// create_user
+
+use Doctrine\ORM\EntityManager;
+use App\Domain\Contact;
+
+$container = require_once __DIR__ . '/../bootstrap.php';
+$entityManager = $container->get(EntityManager::class);
+
+$firstName = $argv[1];
+$lastName = $argv[2];
+$email = $argv[3];
+$phone = $argv[4];
+
+$contact = new Contact();
+$contact->setFirstName($firstName);
+$contact->setLastName($lastName);
+$contact->setEmail($email);
+$contact->setPhone($phone);
+$contact->setRegisteredAt();
+
+$entityManager->persist($contact);
+$entityManager->flush();
+
+echo "Created Contact with ID " . $contact->getId() . PHP_EOL;

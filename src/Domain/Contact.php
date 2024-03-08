@@ -15,11 +15,17 @@ final class Contact
     #[ORM\GeneratedValue]
     private int $id;
 
-    #[ORM\Column(type: 'string', nullable: true)]
-    private string $name;
+    #[ORM\Column(name: 'first_name', type: 'string', nullable: true)]
+    private string $firstName;
+
+    #[ORM\Column(name: 'last_name', type: 'string', nullable: true)]
+    private string $lastName;
 
     #[ORM\Column(type: 'string', unique: true, nullable: false)]
     private string $email;
+
+    #[ORM\Column(type: 'string', unique: true, nullable: true)]
+    private string $phone;
 
     #[ORM\Column(name: 'registered_at', type: 'datetime', nullable: false)]
     private DateTime $registeredAt;
@@ -29,14 +35,24 @@ final class Contact
         return $this->id;
     }
 
-    public function getName(): string
+    public function getFirstName(): string
     {
-        return $this->name;
+        return $this->firstName;
     }
 
-    public function setName(string $name): void
+    public function setFirstName(string $firstName): void
     {
-        $this->name = $name;
+        $this->firstName = $firstName;
+    }
+
+    public function getLastName(): string
+    {
+        return $this->lastName;
+    }
+
+    public function setLastName(string $lastName): void
+    {
+        $this->lastName = $lastName;
     }
 
     public function getEmail(): string
@@ -47,6 +63,16 @@ final class Contact
     public function setEmail(string $email): void
     {
         $this->email = $email;
+    }
+
+    public function getPhone(): string
+    {
+        return $this->phone;
+    }
+
+    public function setPhone(string $phone): void
+    {
+        $this->phone = $phone;
     }
 
     public function getRegisteredAt(): DateTime
