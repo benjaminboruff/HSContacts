@@ -8,9 +8,13 @@
     <h1 class="title">Contacts</h1>
 
     <form action="/contacts" method="get">
-        <label for="search">Search Term</label>
-        <input id="serach" type="search" name="q" value="{{ search }}">
-        <input type="submit" value="Search">
+        <label class="label" for="search">Search Term</label>
+        <div class="control">
+            <input class="input" id="serach" type="search" name="q" value="{{ search }}">
+        </div>
+        <div class="control">
+            <input class="button" type="submit" value="Search">
+        </div>
     </form>
     <br>
     <!-- <ul>
@@ -18,7 +22,7 @@
         <li>{{ contact.firstName }} {{ contact.lastName }} {{ contact.email }} {{ contact.phone }}</li>
         {% endfor %}
     </ul> -->
-     <table>
+     <table class="table is-striped">
         <thead>
         <tr>
             <th>First</th> <th>Last</th> <th>Phone</th> <th>Email</th> <th></th>
@@ -37,8 +41,7 @@
         {% endfor %}
         </tbody>
     </table>
-    <hr>
-    <button hx-get="/" hx-target="#content" hx-swap="outerHTML" hx-push-url="true">Back</button>
+    <button class="button" hx-get="/" hx-target="#content" hx-swap="outerHTML" hx-push-url="true">Back</button>
 </div>
 
 {% endblock %}

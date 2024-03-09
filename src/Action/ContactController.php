@@ -26,7 +26,7 @@ class ContactController
         $contacts = null;
 
         if ($search) {
-            $contacts = $this->contactRepository->searchContacts($search);
+            $contacts = $this->contactRepository->getSearchContacts($search);
         } else {
             $contacts = $this->contactRepository->getAllContacts();
         }

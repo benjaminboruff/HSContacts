@@ -18,7 +18,7 @@ final class ContactRepository extends EntityRepository
         return $query->getResult();
     }
 
-    public function searchContacts(string $search, $number = 30): mixed
+    public function getSearchContacts(string $search, $number = 30): mixed
     {
 
         $dql = <<<QUERY
