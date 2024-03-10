@@ -21,8 +21,10 @@ class ContactController
 
     public function index(Request $request, Response $response, array $args = null): Response
     {
+        $view = Twig::fromRequest($request);
         $search = $request->getQueryParams()['q'] ?? null;
         $contacts = null;
+
 
         if ($search) {
             $contacts = $this->contactRepository->getSearchContacts($search);
@@ -30,9 +32,7 @@ class ContactController
             $contacts = $this->contactRepository->getAllContacts();
         }
 
-        $view = Twig::fromRequest($request);
-
-        if ($request->hasHeader('hx-Request')) {
+        if ($request->hasHeader('HX-Request')) {
             return $view->render($response, 'partial/contacts.twig', ['contacts' => $contacts, 'search' => $search]);
         } else {
             return $view->render($response, 'full/contacts.twig', ['contacts' => $contacts, 'search' => $search]);
