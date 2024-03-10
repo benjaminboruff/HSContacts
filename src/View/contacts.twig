@@ -1,13 +1,9 @@
-{% extends "layout.twig" %}
 
-{% block title %} Contacts {% endblock %}
-
-{% block content %}
-
-<div class="container">
+<title>Contacts</title>
+<div id="content">
     <h1 class="title">Contacts</h1>
 
-    <form action="/contacts" method="get">
+    <form action="/contacts" method="get" hx-target="#content">
         <label class="label" for="search">Search Term</label>
         <div class="control">
             <input class="input" id="serach" type="search" name="q" value="{{ search }}">
@@ -17,11 +13,6 @@
         </div>
     </form>
     <br>
-    <!-- <ul>
-        {% for contact in contacts %}
-        <li>{{ contact.firstName }} {{ contact.lastName }} {{ contact.email }} {{ contact.phone }}</li>
-        {% endfor %}
-    </ul> -->
      <table class="table is-striped">
         <thead>
         <tr>
@@ -41,7 +32,5 @@
         {% endfor %}
         </tbody>
     </table>
-    <button class="button" hx-get="/" hx-target="#content" hx-swap="outerHTML" hx-push-url="true">Back</button>
+    <button class="button" hx-get="/" hx-target="#back" hx-swap="outerHTML" hx-push-url="true">Back</button>
 </div>
-
-{% endblock %}

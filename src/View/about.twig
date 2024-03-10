@@ -1,15 +1,9 @@
-{% extends "layout.twig" %}
 
-{% block title %} About {% endblock %}
-
-{% block content %}
-
-<div class="container">
-  <h1 class="title">About</h1>
+<title>About</title>
+<div id="content">
+  <p class="title">About</p>
   <p>This route brought to you by <a href="https://htmx.org">htmx</a> and 
         <a href="https://www.slimframework.com/">Slim</a>. Syling provided by <a href="https://bulma.io/">Bulma</a>.
   </p>
-  <button hx-get="/" hx-target="#content" hx-swap="outerHTML" hx-push-url="true">Back</button>
+  <button class="button" hx-get="/" hx-target="#back" hx-swap="outerHTML" hx-push-url="true">Back</button>
 </div>
-
-{% endblock %}

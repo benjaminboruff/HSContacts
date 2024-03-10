@@ -13,7 +13,6 @@ use Slim\Views\Twig;
 class ContactController
 {
     private ContactRepository $contactRepository;
-    // private array|null $contacts = null;
 
     public function __construct(ContainerInterface $c)
     {
