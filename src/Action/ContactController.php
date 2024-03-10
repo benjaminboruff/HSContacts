@@ -32,6 +32,10 @@ class ContactController
 
         $view = Twig::fromRequest($request);
 
-        return $view->render($response, 'contacts.twig', ['contacts' => $contacts, 'search' => $search]);
+        if ($request->hasHeader('hx-Request')) {
+            return $view->render($response, 'partial/contacts.twig', ['contacts' => $contacts, 'search' => $search]);
+        } else {
+            return $view->render($response, 'full/contacts.twig', ['contacts' => $contacts, 'search' => $search]);
+        }
     }
 }

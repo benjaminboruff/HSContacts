@@ -26,7 +26,11 @@ $app->get('/contacts', [ContactController::class, 'index'])->setName('all_contac
 $app->get('/about', function (Request $request, Response $response) {
     $view = Twig::fromRequest($request);
 
-    return $view->render($response, 'about.twig');
+    if ($request->hasHeader('HX-Request')) {
+        return $view->render($response, 'partial/about.twig');
+    } else {
+        return $view->render($response, 'full/about.twig');
+    }
 });
 
 $app->run();
