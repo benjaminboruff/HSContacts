@@ -76,10 +76,9 @@ class ContactController
         $contact->setRegisteredAt();
 
         $this->contactRepository->setNewContact($contact);
-        $savedContact = $this->contactRepository->getContactByEmail($params['email']);
 
         return $response
-            ->withHeader('Location', '/contacts/' . (string)$savedContact->getId())
+            ->withHeader('Location', '/contacts')
             ->withStatus(302);
     }
 }
