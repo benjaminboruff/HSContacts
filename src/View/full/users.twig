@@ -5,23 +5,23 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title> Users </title>
-    <script src="assets/js/htmx.min.js"></script>
-    <script src="assets/js/_hyperscript.min.js"></script>
-    <link rel="stylesheet" href="assets/css/bulma.min.css">
+    <script src="/assets/js/htmx.min.js"></script>
+    <script src="/assets/js/_hyperscript.min.js"></script>
+    <link rel="stylesheet" href="/assets/css/bulma.min.css">
   </head>
   <body hx-boost="true">
-      <section id="back" class="section">
-        <div class="container">
-          <div id="content">
-              <p class="title">Users</p>
-              <ul>
-                  {% for user in users %}
-                  <li>{{ user.name }}</li>
-                  {% endfor %}
-              </ul>
-              <button class="button" hx-get="/" hx-target="#back" hx-swap="outerHTML" hx-push-url="true">Back</button>
-          </div>
+    <section id="back" class="section">
+      <div class="container">
+        <div id="content">
+          <p class="title">Users</p>
+          <ul>
+            {% for user in users %}
+            <li>{{ user.name }}</li>
+            {% endfor %}
+          </ul>
+          <button class="button is-light" hx-get="/" hx-target="#back" hx-swap="outerHTML" hx-push-url="true">Back</button>
         </div>
-      </section>
+      </div>
+    </section>
   </body>
 </html>

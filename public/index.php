@@ -18,10 +18,12 @@ $twig = Twig::create(__DIR__ . '/../src/View', ['cache' => false]);
 $app->add(TwigMiddleware::create($app, $twig));
 $app->addErrorMiddleware(true, false, false);
 
-// routes
-$app->get('/', [HomeController::class, 'index'])->setName('index');
-$app->get('/users', [UserController::class, 'index'])->setName('all_users');
-$app->get('/contacts', [ContactController::class, 'index'])->setName('all_contacts');
+// static routes
+$app->get('/', [HomeController::class, 'index']);
+$app->get('/users', [UserController::class, 'index']);
+$app->get('/contacts', [ContactController::class, 'index']);
+$app->get('/contacts/new', [ContactController::class, 'create']);
+$app->post('/contacts/new', [ContactController::class, 'store']);
 
 $app->get('/about', function (Request $request, Response $response) {
     $view = Twig::fromRequest($request);
@@ -32,5 +34,8 @@ $app->get('/about', function (Request $request, Response $response) {
         return $view->render($response, 'full/about.twig');
     }
 });
+
+// dynamic routes
+$app->get('/contacts/{id}', [ContactController::class, 'show']);
 
 $app->run();

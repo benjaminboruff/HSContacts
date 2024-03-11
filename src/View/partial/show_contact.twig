@@ -1,0 +1,22 @@
+<title>Contact</title>
+<div id="content">
+  <div class="title">Contact</div>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>First</th> <th>Last</th> <th>Phone</th> <th>Email</th> <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>{{ contact.firstName }}</td>
+        <td>{{ contact.lastName }}</td>
+        <td>{{ contact.phone }}</td>
+        <td>{{ contact.email }}</td>
+        <td>
+          <a href="/contacts/{{ contact.id }}/edit">Edit</a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

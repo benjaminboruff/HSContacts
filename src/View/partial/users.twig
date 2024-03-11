@@ -1,11 +1,11 @@
 
 <title>Users</title>
 <div id="content">
-    <p class="title">Users</p>
-    <ul>
-        {% for user in users %}
-        <li>{{ user.name }}</li>
-        {% endfor %}
-    </ul>
-    <button class="button" hx-get="/" hx-target="#back" hx-swap="outerHTML" hx-push-url="true">Back</button>
+  <p class="title">Users</p>
+  <ul>
+    {% for user in users %}
+    <li>{{ user.name }}</li>
+    {% endfor %}
+  </ul>
+  <button class="button is-light" hx-get="/" hx-target="#back" hx-swap="outerHTML" hx-push-url="true">Back</button>
 </div>

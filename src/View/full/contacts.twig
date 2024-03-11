@@ -5,48 +5,54 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title> Contacts </title>
-    <script src="assets/js/htmx.min.js"></script>
-    <script src="assets/js/_hyperscript.min.js"></script>
-    <link rel="stylesheet" href="assets/css/bulma.min.css">
+    <script src="/assets/js/htmx.min.js"></script>
+    <script src="/assets/js/_hyperscript.min.js"></script>
+    <link rel="stylesheet" href="/assets/css/bulma.min.css">
   </head>
   <body hx-boost="true">
-      <section id="back" class="section">
-        <div class="container">
-          <div id="content">
-              <h1 class="title">Contacts</h1>
-
-              <form action="/contacts" method="get" hx-target="#content">
-                  <label class="label" for="search">Search Term</label>
-                  <div class="control">
-                      <input class="input" id="serach" type="search" name="q" value="{{ search }}">
-                  </div>
-                  <div class="control">
-                      <input class="button" type="submit" value="Search">
-                  </div>
-              </form>
-              <br>
-              <table class="table is-striped">
-                  <thead>
-                  <tr>
-                      <th>First</th> <th>Last</th> <th>Phone</th> <th>Email</th> <th></th>
-                  </tr>
-                  </thead>
-                  <tbody>
-                  {% for contact in contacts %}
-                      <tr>
-                          <td>{{ contact.firstName }}</td>
-                          <td>{{ contact.lastName }}</td>
-                          <td>{{ contact.phone }}</td>
-                          <td>{{ contact.email }}</td>
-                          <td><a href="/contacts/{{ contact.id }}/edit">Edit</a>
-                              <a href="/contacts/{{ contact.id }}">View</a></td>
-                      </tr>
-                  {% endfor %}
-                  </tbody>
-              </table>
-              <button class="button" hx-get="/" hx-target="#back" hx-swap="outerHTML" hx-push-url="true">Back</button>
-          </div>
+    <section id="back" class="section">
+      <div class="container">
+        <div id="content">
+            <p class="title">Contacts</p>
+            <form action="/contacts" method="get" hx-target="#content">
+              <label class="label" for="search">Search Term</label>
+              <div class="field has-addons">
+                <div class="control">
+                  <input class="input" id="serach" type="search" name="q" value="{{ search }}">
+                </div>
+                <div class="control">
+                  <input class="button is-primary" type="submit" value="Search">
+                </div>
+              </div>
+            </form>
+            <br>
+            <table class="table is-striped">
+              <thead>
+              <tr>
+                <th>First</th> <th>Last</th> <th>Phone</th> <th>Email</th> <th></th>
+              </tr>
+              </thead>
+              <tbody>
+                {% for contact in contacts %}
+                <tr>
+                  <td>{{ contact.firstName }}</td>
+                  <td>{{ contact.lastName }}</td>
+                  <td>{{ contact.phone }}</td>
+                  <td>{{ contact.email }}</td>
+                  <td>
+                    <a href="/contacts/{{ contact.id }}/edit">Edit</a>
+                    <a href="/contacts/{{ contact.id }}" hx-target="#content">View</a>
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+            <p>
+              <a href="/contacts/new" hx-target="#content" hx-swap="outerHTML">Add Contact</a>
+            </p>
+            <button class="button is-light" hx-get="/" hx-target="#back" hx-swap="outerHTML" hx-push-url="true">Back</button>
         </div>
-      </section>
+      </div>
+    </section>
   </body>
 </html>

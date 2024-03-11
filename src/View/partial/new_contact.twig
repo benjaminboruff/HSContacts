@@ -1,0 +1,52 @@
+
+<title>New Contact</title>
+<div id="content">
+<p class="title">New Contact</p>
+  <form action="/contacts/new" method="POST" hx-target="#content" hx-swap="outerHTML">
+    <fieldset>
+      <div class="field">
+        <label class="label" for="email">Email</label>
+        <div class="control">
+            <input class="input" name="email" id="email" type="email" placeholder="Email" value="{{ email or '' }}">
+        </div>
+        <span class="error">{{ errors['email'] }}</span>
+      </div>
+
+      <div class="field">
+        <label class="label" for="first_name">First Name</label>
+        <div class="control">
+          <input class="input" name="first_name" id="first_name" type="text" placeholder="First Name" value="{{ first_name or '' }}">
+        </div>
+        <span class="error">{{ errors['first'] }}</span>
+      </div>
+
+      <div class="field">
+        <label class="label" for="last_name">Last Name</label>
+        <div class="control">
+          <input class="input" name="last_name" id="last_name" type="text" placeholder="Last Name" value="{{ last_name or '' }}">
+        </div>
+        <span class="error">{{ errors['last'] }}</span>
+      </div>
+
+      <div class="field">
+        <label class="label" for="phone">Phone</label>
+        <div class="control">
+          <input class="input" name="phone" id="phone" type="text" placeholder="Phone" value="{{ phone or '' }}">
+        </div>
+        <span class="error">{{ errors['phone'] }}</span>
+      </div>
+
+      <div class="field is-grouped">
+        <div class="control">
+          <button class="button is-primary" type="submit">Save</button>
+        </div>
+        <div class="control">
+          <button class="button is-light" hx-get="/contacts" hx-push-url="true">Back</button>
+        </div>
+      </div>
+    </fieldset>
+  </form>
+</div>
+
+
+
