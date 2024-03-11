@@ -17,6 +17,8 @@ class HomeController
 
     public function index(Request $request, Response $response): Response
     {
+        // Set flash message for next request
+        $this->c->get('flash')->addMessage('Test', 'This is a message');
         $view = Twig::fromRequest($request);
 
         return $view->render($response, 'full/index.twig');
