@@ -14,15 +14,16 @@ use Slim\Views\Twig;
 class ContactController
 {
     private ContactRepository $contactRepository;
+    private Twig $view;
 
-    public function __construct(ContainerInterface $c)
+    public function __construct(private ContainerInterface $c)
     {
         $this->contactRepository = $c->get(EntityManager::class)->getRepository('App\Domain\Contact');
+        $this->view = $c->get('view');
     }
 
     public function index(Request $request, Response $response, array $args = null): Response
     {
-        $view = Twig::fromRequest($request);
         $search = $request->getQueryParams()['q'] ?? null;
         $contacts = null;
 
@@ -34,9 +35,9 @@ class ContactController
         }
 
         if ($request->hasHeader('HX-Request')) {
-            return $view->render($response, 'partial/contacts.twig', ['contacts' => $contacts, 'search' => $search]);
+            return $this->view->render($response, 'partial/contacts.twig', ['contacts' => $contacts, 'search' => $search]);
         } else {
-            return $view->render($response, 'full/contacts.twig', ['contacts' => $contacts, 'search' => $search]);
+            return $this->view->render($response, 'full/contacts.twig', ['contacts' => $contacts, 'search' => $search]);
         }
     }
 
@@ -44,23 +45,21 @@ class ContactController
     {
         $args = (array)$request->getAttributes();
         $contact = $this->contactRepository->getContactById($args['id']);
-        $view = Twig::fromRequest($request);
 
         if ($request->hasHeader('HX-Request')) {
-            return $view->render($response, 'partial/show_contact.twig', ['contact' => $contact]);
+            return $this->view->render($response, 'partial/show_contact.twig', ['contact' => $contact]);
         } else {
-            return $view->render($response, 'full/show_contact.twig', ['contact' => $contact]);
+            return $this->view->render($response, 'full/show_contact.twig', ['contact' => $contact]);
         }
     }
 
     public function create(Request $request, Response $response): Response
     {
-        $view = Twig::fromRequest($request);
 
         if ($request->hasHeader('HX-Request')) {
-            return $view->render($response, 'partial/new_contact.twig');
+            return $this->view->render($response, 'partial/new_contact.twig');
         } else {
-            return $view->render($response, 'full/new_contact.twig');
+            return $this->view->render($response, 'full/new_contact.twig');
         }
     }
 
@@ -76,6 +75,8 @@ class ContactController
         $contact->setRegisteredAt();
 
         $this->contactRepository->setNewContact($contact);
+
+        $this->c->get('flash')->addMessage('status', 'Created New Contact!');
 
         return $response
             ->withHeader('Location', '/contacts')

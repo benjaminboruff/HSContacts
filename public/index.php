@@ -2,24 +2,28 @@
 
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
-use Slim\Views\Twig;
 use Slim\Views\TwigMiddleware;
 use DI\Bridge\Slim\Bridge;
 use App\Action\HomeController;
 use App\Action\UserController;
 use App\Action\ContactController;
 use Psr\Container\ContainerInterface;
-use Slim\Flash\Messages;
 
 $container = require_once __DIR__ . '/../bootstrap.php';
 
+// set flash as a global var for twig files
+$container->get('view')->getEnvironment()->addGlobal('flash', $container->get('flash'));
+
+$settings = $container->get('settings');
+
 $app = Bridge::create($container);
 
-$twig = Twig::create(__DIR__ . '/../src/View', ['cache' => false]);
+//
+// middleware
+//
+$app->add(TwigMiddleware::createFromContainer($app));
 
-$app->add(TwigMiddleware::create($app, $twig));
-
-// Add session start middleware
+// session start middleware
 $app->add(
     function ($request, $next) {
         // Start PHP session
@@ -34,9 +38,15 @@ $app->add(
     }
 );
 
-$app->addErrorMiddleware(true, false, false);
+$app->addErrorMiddleware(
+    $settings['slim']['displayErrorDetails'],
+    $settings['slim']['logErrors'],
+    $settings['slim']['logErrorDetails']
+);
 
+//
 // static routes
+//
 $app->get('/', [HomeController::class, 'index']);
 $app->get('/users', [UserController::class, 'index']);
 $app->get('/contacts', [ContactController::class, 'index']);
@@ -44,23 +54,28 @@ $app->get('/contacts/new', [ContactController::class, 'create']);
 $app->post('/contacts/new', [ContactController::class, 'store']);
 
 $app->get('/about', function (Request $request, Response $response, ContainerInterface $c) {
-    $view = Twig::fromRequest($request);
-    $flash = $c->get('flash');
-    $messages = $flash->getMessages();
-    print_r($messages);
 
-    // Get the first message from a specific key
-    $test = $flash->getFirstMessage('Test');
-    print_r($test);
+
+    // dump($_SESSION);
+    // die();
+
+    // $flash = $c->get('flash');
+    // $messages = $flash->getMessages();
+    // print_r($messages);
+
+    // $test = $flash->getFirstMessage('Test');
+    // print_r($test);
 
     if ($request->hasHeader('HX-Request')) {
-        return $view->render($response, 'partial/about.twig');
+        return $c->get('view')->render($response, 'partial/about.twig');
     } else {
-        return $view->render($response, 'full/about.twig');
+        return $c->get('view')->render($response, 'full/about.twig');
     }
 });
 
+//
 // dynamic routes
+//
 $app->get('/contacts/{id}', [ContactController::class, 'show']);
 
 $app->run();

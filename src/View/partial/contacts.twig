@@ -40,3 +40,16 @@
   </p>
   <button class="button is-light" hx-get="/" hx-target="#back" hx-swap="outerHTML" hx-push-url="true">Back</button>
 </div>
+
+{% set msg = flash.getMessage('status') | first %}
+{% if msg %}
+<article class="message is-success" _="init wait 2s then remove me">
+  <div class="message-header">
+    <p>Success</p>
+    <button class="delete" aria-label="delete"></button>
+  </div>
+  <div class="message-body">
+    {{ msg }}
+  </div>
+</article>
+{% endif %}
