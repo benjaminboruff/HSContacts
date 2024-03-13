@@ -13,7 +13,7 @@ final class Contact
     #[ORM\Id]
     #[ORM\Column(type: 'integer')]
     #[ORM\GeneratedValue]
-    private int $id;
+    private int|null $id = null;
 
     #[ORM\Column(name: 'first_name', type: 'string', nullable: true)]
     private string $firstName;
