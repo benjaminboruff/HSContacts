@@ -1,0 +1,25 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title> HSContacts </title>
+    <script src="/assets/js/htmx.min.js"></script>
+    <script src="/assets/js/_hyperscript.min.js"></script>
+    <link rel="stylesheet" href="/assets/css/bulma.min.css">
+  </head>
+  <body hx-boost="true">
+    <section id="back" class="section">
+      <div class="container">
+        <div id="content">
+          <p class="title">Welcome to HyperSlim</p>
+          <button class="button is-light is-info" hx-get="/about" hx-target="#content" hx-swap="outerHTML" hx-push-url="true">About</button>
+          <button class="button is-light is-link" hx-get="/users" hx-target="#content" hx-swap="outerHTML" hx-push-url="true">Users</button>
+          <button class="button is-light is-info" hx-get="/contacts" hx-target="#content" hx-swap="outerHTML" hx-push-url="true">Contacts</button>
+          <button class="button is-light is-danger" _="on click alert('This alert brought to you by _hyperscript')">Alert</button>
+        </div>  
+      </div>
+    </section>
+  </body>
+</html>

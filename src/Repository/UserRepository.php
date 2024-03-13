@@ -1,5 +1,5 @@
 <?php
-// src/UserRepository.php
+// UserRepository.php
 
 namespace App\Repository;
 

@@ -13,17 +13,22 @@ use Slim\Views\Twig;
 class UserController
 {
     private UserRepository $userRepository;
+    private Twig $view;
 
-    public function __construct(ContainerInterface $c)
+    public function __construct(private ContainerInterface $c)
     {
         $this->userRepository = $c->get(EntityManager::class)->getRepository('App\Domain\User');
+        $this->view = $c->get('view');
     }
 
     public function index(Request $request, Response $response): Response
     {
         $users = $this->userRepository->getAllUsers();
-        $view = Twig::fromRequest($request);
 
-        return $view->render($response, 'users.twig', ['users' => $users]);
+        if ($request->hasHeader('HX-Request')) {
+            return $this->view->render($response, 'partial/users.twig', ['users' => $users]);
+        } else {
+            return $this->view->render($response, 'full/users.twig', ['users' => $users]);
+        }
     }
 }

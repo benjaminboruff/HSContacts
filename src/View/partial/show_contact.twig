@@ -1,0 +1,16 @@
+<title>Contact</title>
+<div id="content">
+  <div class="box">
+      <p class="title">
+        {{ contact.firstName }} {{ contact.lastName }}
+      </p>
+      <div class="content">
+        <div><span>Email: </span><span>{{ contact.email }}</span></div>
+        <div><span>Phone: </span><span>{{ contact.phone }}</span></div>
+      </div>
+    <div class="">
+      <button class="button is-light" hx-get="/contacts" hx-target="#content" hx-swap="outerHTML" hx-push-url="true">Back</button>
+      <button class="button is-primary is-light" hx-get="/contacts/{{ contact.id }}/edit" hx-target="#content" hx-swap="outerHTML">Edit</button>
+    </div>
+  </div>
+</div>
