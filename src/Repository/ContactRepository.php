@@ -35,17 +35,17 @@ final class ContactRepository extends EntityRepository
         return $query->getResult();
     }
 
-    public function getContactById(int $id): Contact
+    public function getContactById(int $id): ?Contact
     {
         return $this->getEntityManager()->getRepository('App\Domain\Contact')->find($id);
     }
 
-    public function getContactByEmail(string $email): Contact
+    public function getContactByEmail(string $email): ?Contact
     {
         return $this->getEntityManager()->getRepository('App\Domain\Contact')->findOneBy(['email' => $email]);
     }
 
-    public function setNewContact(Contact $contact): void
+    public function setContact(Contact $contact): void
     {
         $this->getEntityManager()->persist($contact);
         $this->getEntityManager()->flush();
