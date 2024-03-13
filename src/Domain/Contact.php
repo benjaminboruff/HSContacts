@@ -24,7 +24,7 @@ final class Contact
     #[ORM\Column(type: 'string', unique: true, nullable: false)]
     private string $email;
 
-    #[ORM\Column(type: 'string', unique: true, nullable: true)]
+    #[ORM\Column(type: 'string', nullable: true)]
     private string $phone;
 
     #[ORM\Column(name: 'registered_at', type: 'datetime', nullable: false)]
