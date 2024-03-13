@@ -1,22 +1,16 @@
 <title>Contact</title>
 <div id="content">
-  <div class="title">Contact</div>
-  <table class="table">
-    <thead>
-      <tr>
-        <th>First</th> <th>Last</th> <th>Phone</th> <th>Email</th> <th></th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>{{ contact.firstName }}</td>
-        <td>{{ contact.lastName }}</td>
-        <td>{{ contact.phone }}</td>
-        <td>{{ contact.email }}</td>
-        <td>
-          <a href="/contacts/{{ contact.id }}/edit">Edit</a>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+  <div class="box">
+      <p class="title">
+        {{ contact.firstName }} {{ contact.lastName }}
+      </p>
+      <div class="content">
+        <div><span>Email: </span><span>{{ contact.email }}</span></div>
+        <div><span>Phone: </span><span>{{ contact.phone }}</span></div>
+      </div>
+    <div class="">
+      <button class="button is-light" hx-get="/contacts" hx-target="#content" hx-swap="outerHTML" hx-push-url="true">Back</button>
+      <button class="button is-primary is-light" hx-get="/contacts/{{ contact.id }}/edit" hx-target="#content" hx-swap="outerHTML">Edit</button>
+    </div>
+  </div>
 </div>

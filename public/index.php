@@ -55,17 +55,6 @@ $app->post('/contacts/new', [ContactController::class, 'store']);
 
 $app->get('/about', function (Request $request, Response $response, ContainerInterface $c) {
 
-
-    // dump($_SESSION);
-    // die();
-
-    // $flash = $c->get('flash');
-    // $messages = $flash->getMessages();
-    // print_r($messages);
-
-    // $test = $flash->getFirstMessage('Test');
-    // print_r($test);
-
     if ($request->hasHeader('HX-Request')) {
         return $c->get('view')->render($response, 'partial/about.twig');
     } else {
@@ -77,5 +66,8 @@ $app->get('/about', function (Request $request, Response $response, ContainerInt
 // dynamic routes
 //
 $app->get('/contacts/{id}', [ContactController::class, 'show']);
+$app->post('/contacts/{id}/delete', [ContactController::class, 'delete']);
+$app->get('/contacts/{id}/edit', [ContactController::class, 'edit']);
+$app->post('/contacts/{id}/edit', [ContactController::class, 'update']);
 
 $app->run();

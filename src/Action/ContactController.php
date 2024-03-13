@@ -53,6 +53,32 @@ class ContactController
         }
     }
 
+    public function edit(Request $request, Response $response): Response
+    {
+        $args = (array)$request->getAttributes();
+        $contact = $this->contactRepository->getContactById($args['id']);
+
+        if ($request->hasHeader('HX-Request')) {
+            return $this->view->render($response, 'partial/edit_contact.twig', ['contact' => $contact]);
+        } else {
+            return $this->view->render($response, 'full/edit_contact.twig', ['contact' => $contact]);
+        }
+    }
+
+    public function delete(Request $request, Response $response): Response
+    {
+        $args = (array)$request->getAttributes();
+        $contact = $this->contactRepository->getContactById($args['id']);
+
+        $this->contactRepository->deleteContact($contact);
+
+        $this->c->get('flash')->addMessage('status', 'Deleted Contact!');
+
+        return $response
+            ->withHeader('Location', '/contacts')
+            ->withStatus(302);
+    }
+
     public function create(Request $request, Response $response): Response
     {
 

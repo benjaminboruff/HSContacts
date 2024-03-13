@@ -50,4 +50,10 @@ final class ContactRepository extends EntityRepository
         $this->getEntityManager()->persist($contact);
         $this->getEntityManager()->flush();
     }
+
+    public function deleteContact(Contact $contact): void
+    {
+        $this->getEntityManager()->remove($contact);
+        $this->getEntityManager()->flush();
+    }
 }

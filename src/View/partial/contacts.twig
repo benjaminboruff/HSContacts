@@ -39,8 +39,8 @@
         <td>{{ contact.phone }}</td>
         <td>{{ contact.email }}</td>
         <td>
-          <a href="/contacts/{{ contact.id }}/edit">Edit</a>
-          <a href="/contacts/{{ contact.id }}" hx-target="#content">View</a>
+          <a href="/contacts/{{ contact.id }}/edit" hx-target="#content" hx-swap="outerHTML" hx-push-url="true">Edit</a>
+          <a href="/contacts/{{ contact.id }}" hx-target="#content" hx-swap="outerHTML" hx-push-url="true">View</a>
         </td>
       </tr>
       {% endfor %}
